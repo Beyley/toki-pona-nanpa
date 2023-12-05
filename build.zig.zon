@@ -1,0 +1,11 @@
+.{
+    .name = "toki-pona-nanpa",
+    .version = "0.0.0",
+
+    .paths = .{
+        "src/root.zig",
+        "build.zig",
+        "buidl.zig.zon",
+        "README.md",
+    },
+}

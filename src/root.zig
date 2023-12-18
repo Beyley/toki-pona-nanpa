@@ -4,6 +4,8 @@ const testing = std.testing;
 pub const StringifyOptions = struct {
     /// Whether or not to use `ali` instead of `ale`
     ali: bool = false,
+    /// Whether or not to use likujo as 7
+    likujo: bool = false,
 };
 
 pub fn stringifyRoman(num: anytype, writer: anytype) !void {
@@ -197,6 +199,13 @@ pub fn stringify(num: anytype, writer: anytype, options: StringifyOptions) !void
         if (working != 20) try writer.writeByte(' ');
     }
 
+    if (options.likujo)
+        while (working >= 7) : (working -= 7) {
+            try writer.writeAll("likujo");
+
+            if (working != 7) try writer.writeByte(' ');
+        };
+
     while (working >= 5) : (working -= 5) {
         try writer.writeAll("luka");
 
@@ -222,6 +231,8 @@ pub fn parse(comptime T: type, reader: anytype) !T {
             ret += 100;
         } else if (std.mem.eql(u8, trimmed_token, "mute")) {
             ret += 20;
+        } else if (std.mem.eql(u8, trimmed_token, "likujo")) {
+            ret += 7;
         } else if (std.mem.eql(u8, trimmed_token, "luka")) {
             ret += 5;
         } else if (std.mem.eql(u8, trimmed_token, "tu")) {

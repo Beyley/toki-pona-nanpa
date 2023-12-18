@@ -8,10 +8,10 @@ pub fn main() !void {
     var buffered_writer = std.io.bufferedWriter(raw_writer);
     const writer = buffered_writer.writer();
 
-    for (0..1001) |i| {
+    for (0..101) |i| {
         try std.fmt.format(writer, "{d}: ", .{i});
         try nanpa.stringify(i, writer, .{});
-        try writer.writeByte(' ');
+        try writer.writeAll(", ");
         try nanpa.stringifyRoman(i, writer);
         try writer.writeByte('\n');
     }
